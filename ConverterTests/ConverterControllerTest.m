@@ -34,7 +34,7 @@
 - (UIButton *)buttonWithTag:(NSInteger)tag
 {
     UIButton *button = [[UIButton alloc] init];
-    button.tag = 1;
+    button.tag = tag;
     return button;
 
 }
@@ -47,7 +47,38 @@
     
 }
 
+-(void) testZahlenWerdenAngehaengt
+{
+    [controller buttonTouched:[self buttonWithTag:1]];
+    [controller buttonTouched:[self buttonWithTag:2]];
+    [controller buttonTouched:[self buttonWithTag:3]];
+    [controller buttonTouched:[self buttonWithTag:4]];
+    
+    
+    
+    
+    assertThat(displayLabel.text, is(@"1234"));
+}
 
+- (void) testZahlenLaengerAlsZehnZiffernWerdenBegrenzt
+{
+
+    [controller buttonTouched:[self buttonWithTag:1]];
+    [controller buttonTouched:[self buttonWithTag:2]];
+    [controller buttonTouched:[self buttonWithTag:3]];
+    [controller buttonTouched:[self buttonWithTag:4]];
+    [controller buttonTouched:[self buttonWithTag:1]];
+    [controller buttonTouched:[self buttonWithTag:2]];
+    [controller buttonTouched:[self buttonWithTag:3]];
+    [controller buttonTouched:[self buttonWithTag:4]];
+    [controller buttonTouched:[self buttonWithTag:1]];
+    [controller buttonTouched:[self buttonWithTag:2]];
+    [controller buttonTouched:[self buttonWithTag:3]];
+    [controller buttonTouched:[self buttonWithTag:4]];
+    
+    assertThat(displayLabel.text, is(@"1234123412"));
+
+}
 
 
 - (void)setUp {

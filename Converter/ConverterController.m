@@ -18,7 +18,17 @@
 - (IBAction)buttonTouched:(id)sender {
     
     
-    self.displayLabel.text = [NSString stringWithFormat:@"%ld", [sender tag]];
+    if ( self.displayLabel.text.length >= 10 )
+        return;
+    
+    NSMutableString *appendString = [[NSMutableString alloc] init];
+    
+    if (self.displayLabel.text != nil)
+        [appendString appendString:self.displayLabel.text];
+    
+    [appendString appendString:[NSString stringWithFormat:@"%ld", [sender tag]]];
+    
+    self.displayLabel.text = appendString;
     
 }
 
