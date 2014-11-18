@@ -16,6 +16,10 @@
 }
 
 - (IBAction)buttonTouched:(id)sender {
+    
+    
+    self.displayLabel.text = [NSString stringWithFormat:@"%ld", [sender tag]];
+    
 }
 
 
